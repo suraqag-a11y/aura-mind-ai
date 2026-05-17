@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AuraMind AI Pro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#0f0f12;
+color:white;
+display:flex;
+height:100vh;
+}
+
+.sidebar{
+width:260px;
+background:#1a1a1f;
+padding:15px;
+}
+
+.main{
+flex:1;
+display:flex;
+flex-direction:column;
+}
+
+.chat{
+flex:1;
+padding:20px;
+overflow:auto;
+}
+
+.msg{
+margin:10px 0;
+padding:12px;
+border-radius:10px;
+max-width:70%;
+word-wrap:break-word;
+line-height:1.5;
+}
+
+.user{
+background:#2d2f3a;
+margin-left:auto;
+}
+
+.ai{
+background:#d46a47;
+}
+
+.inputBox{
+display:flex;
+padding:10px;
+background:#1a1a1f;
+gap:10px;
+}
+
+input{
+flex:1;
+padding:12px;
+border:none;
+outline:none;
+border-radius:8px;
+}
+
+button{
+padding:12px 16px;
+background:#d46a47;
+border:none;
+color:white;
+border-radius:8px;
+cursor:pointer;
+}
+
+.payment{
+background:#111;
+padding:15px;
+margin-top:20px;
+border-radius:10px;
+font-size:14px;
+}
+
+small{color:#aaa;}
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>AuraMind AI</h2>
+<p>Pro Offline AI (No ChatGPT)</p>
+
+<div class="payment">
+<h3>Premium Info</h3>
+<p><strong>Method:</strong> EasyPaisa</p>
+<p><strong>Name:</strong> Hussain Ahmad</p>
+<p><strong>Number:</strong> 03464318737</p>
+<small>Manual verification required</small>
+</div>
+
+</div>
+
+<div class="main">
+
+<div class="chat" id="chat"></div>
+
+<div class="inputBox">
+<input id="input" placeholder="Ask AuraMind..." onkeydown="enter(event)">
+<button onclick="send()">Send</button>
+</div>
+
+</div>
+
+<script>
+
+let memory = {
+boss: "Suraqa Ubaid",
+country: "Pakistan"
+};
+
+function addMsg(text,type){
+const div = document.createElement("div");
+div.className = "msg "+type;
+div.innerText = text;
+
+let chat = document.getElementById("chat");
+chat.appendChild(div);
+chat.scrollTop = chat.scrollHeight;
+}
+
+/* 🧠 MAIN AI BRAIN */
+function aiBrain(q){
+
+q = q.toLowerCase();
+
+/* 👑 boss memory */
+if(q.includes("boss") || q.includes("creator") || q.includes("owner")){
+return "Mera boss " + memory.boss + " hai jo " + memory.country + " se hai 🇵🇰";
+}
+
+/* about */
+if(q.includes("who are you") || q.includes("what are you")){
+return "Main AuraMind AI hoon, ek custom offline AI system.";
+}
+
+/* programming */
+if(q.includes("python")){
+return "Python ek powerful programming language hai jo AI aur web development me use hoti hai.";
+}
+
+if(q.includes("html")){
+return "HTML website ka structure banata hai.";
+}
+
+if(q.includes("css")){
+return "CSS website ko design karta hai.";
+}
+
+if(q.includes("javascript") || q.includes("js")){
+return "JavaScript website ko interactive banata hai.";
+}
+
+/* math */
+if(q.includes("2+2")){
+return "2 + 2 = 4";
+}
+
+/* ai */
+if(q.includes("ai")){
+return "AI machines ko smart banata hai jo human jaisa soch sakte hain.";
+}
+
+/* greeting */
+if(q.includes("hello") || q.includes("hi")){
+return "Hello 👋 main AuraMind AI hoon, kaise help karun?";
+}
+
+/* fallback */
+return "Mujhe is baat ka proper jawab nahi mila, thoda simple words me poochho.";
+}
+
+function send(){
+
+let input = document.getElementById("input");
+let text = input.value.trim();
+
+if(!text) return;
+
+addMsg(text,"user");
+
+setTimeout(()=>{
+addMsg(aiBrain(text),"ai");
+},400);
+
+input.value="";
+
+}
+
+function enter(e){
+if(e.key === "Enter"){
+send();
+}
+}
+
+</script>
+
+</body>
+</html>
